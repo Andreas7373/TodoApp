@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="StatsService/StatsService.csproj" Id="71b182d8-bd66-452d-9ab1-772483a541b2" />
+  <Project Path="TaskService/TaskService.csproj" Id="376521be-4ac2-4246-8138-7d4957104b33" />
+  <Project Path="TodoFrontend/TodoFrontend.csproj" Id="b9c7ff0e-fc5a-403e-b72c-2f911f2dfed2" />
+</Solution>

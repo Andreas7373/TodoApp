@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: todoapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d todoapp"]
+      interval: 5s
+      retries: 10
+
+  taskservice:
+    image: todo-taskservice:dev
+    ports:
+      - "5029:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=todoapp;Username=postgres;Password=${POSTGRES_PASSWORD}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  statsservice:
+    image: todo-statsservice:dev
+    ports:
+      - "5089:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      TaskService__BaseUrl: "http://taskservice:8080"
+    depends_on:
+      - taskservice
+
+  todofrontend:
+    image: todo-frontend:dev
+    ports:
+      - "5090:8080"
+    depends_on:
+      - taskservice
+      - statsservice
+
+volumes:
+  postgres_data:

@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# .NET build files
+**/bin/
+**/obj/
+
+# Test results
+TestResults/
+*.trx
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local application settings
+**/appsettings.Local.json

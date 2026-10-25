@@ -1,0 +1,16 @@
+# Build files
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Git
+.git/
+.gitignore
+
+# Local secrets
+.env
+.env.*

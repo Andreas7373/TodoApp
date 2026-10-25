@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Todo App</h1>
+
+    <h2>Create Task</h2>
+    <form id="taskForm">
+        <input type="text" id="taskTitle"
+               placeholder="Enter task title" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <p id="message"></p>
+
+    <h2>Tasks</h2>
+    <button onclick="loadTasks()">Load Tasks</button>
+    <div id="tasks"></div>
+
+    <h2>Statistics</h2>
+    <button onclick="loadStats()">Load Statistics</button>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3 id="totalTasks">0</h3>
+            <p>Total</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="completedTasks">0</h3>
+            <p>Completed</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="pendingTasks">0</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
