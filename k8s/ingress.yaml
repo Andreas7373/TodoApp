@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todoapp
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /api/tasks
+            pathType: Prefix
+            backend:
+              service:
+                name: taskservice
+                port:
+                  number: 5029
+          - path: /api/stats
+            pathType: Prefix
+            backend:
+              service:
+                name: statsservice
+                port:
+                  number: 5089
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todofrontend
+                port:
+                  number: 5090

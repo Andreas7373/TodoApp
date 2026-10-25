@@ -44,14 +44,6 @@ button {
         background-color: #1d4ed8;
     }
 
-pre {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    overflow-x: auto;
-}
-
 #message {
     color: #16a34a;
 }

@@ -1,5 +1,6 @@
-﻿const taskApi = "http://localhost:5029";
-const statsApi = "http://localhost:5089";
+﻿const isLocalDev = ["5214", "5090"].includes(location.port);
+const taskApi = isLocalDev ? "http://localhost:5029" : "";
+const statsApi = isLocalDev ? "http://localhost:5089" : "";
 
 async function loadTasks() {
     const container = document.getElementById("tasks");
@@ -123,3 +124,6 @@ async function completeTask(id) {
         alert(error.message);
     }
 }
+
+loadTasks();
+loadStats();

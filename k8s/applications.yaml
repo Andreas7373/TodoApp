@@ -15,14 +15,14 @@ spec:
     spec:
       containers:
         - name: taskservice
-          image: andreas49152/todo-taskservice:v1
+          image: andreas49152/todo-taskservice:v3
           ports:
             - containerPort: 8080
           env:
             - name: ASPNETCORE_HTTP_PORTS
               value: "8080"
             - name: ASPNETCORE_ENVIRONMENT
-              value: Development
+              value: Production
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -37,10 +37,11 @@ kind: Service
 metadata:
   name: taskservice
 spec:
+  type: ClusterIP
   selector:
     app: taskservice
   ports:
-    - port: 8080
+    - port: 5029
       targetPort: 8080
 
 ---
@@ -68,9 +69,9 @@ spec:
             - name: ASPNETCORE_HTTP_PORTS
               value: "8080"
             - name: ASPNETCORE_ENVIRONMENT
-              value: Development
+              value: Production
             - name: TaskService__BaseUrl
-              value: "http://taskservice:8080"
+              value: "http://taskservice:5029"
 
 ---
 apiVersion: v1
@@ -78,10 +79,11 @@ kind: Service
 metadata:
   name: statsservice
 spec:
+  type: ClusterIP
   selector:
     app: statsservice
   ports:
-    - port: 8080
+    - port: 5089
       targetPort: 8080
 
 ---
@@ -102,7 +104,7 @@ spec:
     spec:
       containers:
         - name: todofrontend
-          image: andreas49152/todo-frontend:v1
+          image: andreas49152/todo-frontend:v3
           ports:
             - containerPort: 8080
           env:
@@ -115,8 +117,9 @@ kind: Service
 metadata:
   name: todofrontend
 spec:
+  type: ClusterIP
   selector:
     app: todofrontend
   ports:
-    - port: 8080
+    - port: 5090
       targetPort: 8080
